@@ -1,5 +1,3 @@
-# bot_logic2.py
-
 import discord
 from discord.ext import commands
 import random
@@ -32,7 +30,7 @@ dicas = [
 # Comando de dica
 @bot.command()
 async def dica(ctx):
-    await ctx.send(f" Dica ecológica: {random.choice(dicas)}")
+    await ctx.send(f"Dica ecológica: {random.choice(dicas)}")
 
 # Lista de desafios
 desafios = [
@@ -58,13 +56,16 @@ reciclagem = {
 
 # Comando reciclar
 @bot.command()
-async def reciclar(ctx, item: str):
+async def reciclar(ctx, item: str = None):
+    if item is None:
+        await ctx.send("Use assim: $reciclar papel/plastico/vidro/metal")
+        return
+
     item = item.lower()
     if item in reciclagem:
         await ctx.send(reciclagem[item])
     else:
-        await ctx.send(" Não conheço esse material. Use: papel, plastico, vidro ou metal.")
-
+        await ctx.send("Não conheço esse material. Use: papel, plastico, vidro ou metal.")
 # Comando extra educativo
 @bot.command()
 async def eco(ctx):
